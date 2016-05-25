@@ -15,28 +15,38 @@ public class ButtonFunction : MonoBehaviour {
 	private int offsetTop = 0;
 	private int offsetBottom = 0;
 
+    private int fontSize = 0;
+
 	// Use this for initialization
 	void Start () {
-		if (this.name.Contains ("Toggle")) {
+        if (this.name.Contains ("Toggle")) {
 			myToggle = this.GetComponent<InstantGuiToggle> ();
 			offsetRight = myToggle.offset.right;
 			offsetLeft = myToggle.offset.left;
 			offsetTop = myToggle.offset.top;
 			offsetBottom = myToggle.offset.bottom;
+            fontSize = myToggle.style.fontSize;
 		} else if (this.name.Contains ("List")) {
 			myList = this.GetComponent<InstantGuiList> ();
 			offsetRight = myList.offset.right;
 			offsetLeft = myList.offset.left;
 			offsetTop = myList.offset.top;
 			offsetBottom = myList.offset.bottom;
-		}else {
+            fontSize = myList.style.fontSize;
+        }
+        else {
 			myButton = this.GetComponent<InstantGuiButton> ();
 			offsetRight = myButton.offset.right;
 			offsetLeft = myButton.offset.left;
 			offsetTop = myButton.offset.top;
 			offsetBottom = myButton.offset.bottom;
-		}
-	}
+            fontSize = myToggle.style.fontSize;
+        }
+        //print("Name: " + this.name + " offsetRight: " + offsetRight);
+        //print("Name: " + this.name + " offsetLeft: " + offsetLeft);
+        //print("Name: " + this.name + " offsetTop: " + offsetTop);
+        //print("Name: " + this.name + " offsetBottom: " + offsetBottom);
+    }
 
 	void onButtonClick(){
         try {
@@ -202,21 +212,24 @@ public class ButtonFunction : MonoBehaviour {
 
 	void updateButtons(){
 		if (myButton != null) {
-			myButton.offset.right = (int)(offsetRight * SharedValues.dpiScale);
-			myButton.offset.left = (int)(offsetLeft * SharedValues.dpiScale);
-			myButton.offset.top = (int)(offsetTop * SharedValues.dpiScale);
-			myButton.offset.bottom = (int)(offsetBottom * SharedValues.dpiScale);
-		} else if (myToggle != null) {
-			myToggle.offset.right = (int)(offsetRight * SharedValues.dpiScale);
-			myToggle.offset.left = (int)(offsetLeft * SharedValues.dpiScale);
+            myButton.offset.right = (int)(offsetRight * SharedValues.dpiScale);
+            myButton.offset.left = (int)(offsetLeft * SharedValues.dpiScale);
+            myButton.offset.top = (int)(offsetTop * SharedValues.dpiScale);
+            myButton.offset.bottom = (int)(offsetBottom * SharedValues.dpiScale);
+            //myButton.style.fontSize = (int)(fontSize * SharedValues.dpiScale);
+        } else if (myToggle != null) {
+            myToggle.offset.right = (int)(offsetRight * SharedValues.dpiScale);
+            myToggle.offset.left = (int)(offsetLeft * SharedValues.dpiScale);
 			myToggle.offset.top = (int)(offsetTop * SharedValues.dpiScale);
 			myToggle.offset.bottom = (int)(offsetBottom * SharedValues.dpiScale);
-		} else if (myList != null) {
+            //myToggle.style.fontSize = (int)(fontSize * SharedValues.dpiScale);
+        } else if (myList != null) {
 			myList.offset.right = (int)(offsetRight * SharedValues.dpiScale);
 			myList.offset.left = (int)(offsetLeft * SharedValues.dpiScale);
 			myList.offset.top = (int)(offsetTop * SharedValues.dpiScale);
 			myList.offset.bottom = (int)(offsetBottom * SharedValues.dpiScale);
-		}
+            //myList.style.fontSize = (int)(fontSize * SharedValues.dpiScale);
+        }
 		switch (this.name) {
 		case("NextPage_Button"):
 			if ((SharedValues.screen < 4 || (SharedValues.screen < 13 && SharedValues.screen >= 10)) && myButton.disabled) {

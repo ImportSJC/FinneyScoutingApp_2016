@@ -19,6 +19,7 @@ public class LabelFunction : MonoBehaviour {
         offsetLeft = myLabel.offset.left;
         offsetTop = myLabel.offset.top;
         offsetBottom = myLabel.offset.bottom;
+        fontSize = myLabel.style.fontSize;
     }
 
 
@@ -247,6 +248,9 @@ public class LabelFunction : MonoBehaviour {
 		case("AverageDefense_Label"):
 			myLabel.text = "Average\nDefense\nAbility";
 			break;
+        default:
+                myLabel.style.fontSize = (int)(fontSize * SharedValues.dpiScale);
+                break;
 		}
 	}
 	

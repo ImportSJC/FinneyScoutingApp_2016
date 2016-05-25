@@ -52,8 +52,13 @@ public class SharedValues : MonoBehaviour {
 
 	public static double dpiScale = 1.0;
 
-	// Use this for initialization
-	void Start () {
+    private int offsetRight = 0;
+    private int offsetLeft = 0;
+    private int offsetTop = 0;
+    private int offsetBottom = 0;
+
+    // Use this for initialization
+    void Start () {
 		fileDirectory = Application.persistentDataPath + "/";
 
 		myTeam = new Team(0, 0);
@@ -71,7 +76,7 @@ public class SharedValues : MonoBehaviour {
 		fieldPage2 = findGameObject ("FieldPage2");
 		fieldPage3 = findGameObject ("FieldPage3");
 		fieldPage4 = findGameObject ("FieldPage4");
-	}
+    }
 
 	public static void decreaseDPI(){
 		dpiScale -= 0.1;
@@ -262,22 +267,38 @@ public class SharedValues : MonoBehaviour {
 		return -1;
 	}
 
+    Rect ScaledTextArea(int x, int y, int width, int height, double dpi)
+    {
+        //print("dpi: " + dpi);
+        offsetLeft = x;
+        offsetRight = x+width;
+        offsetTop = y;
+        offsetBottom = y + height;
+
+        offsetLeft = (int)(offsetLeft * dpi);
+        offsetRight = (int)(offsetRight * dpi);
+        offsetTop = (int)(offsetTop * dpi);
+        offsetBottom = (int)(offsetBottom * dpi);
+
+        return new Rect(offsetLeft, offsetTop, offsetRight - offsetLeft, offsetBottom - offsetTop);
+    }
+
 	void OnGUI(){
 
 		if (screen == 0) {
-			tempTeamNumber = GUI.TextArea (new Rect (100, 40, 100, 50), tempTeamNumber);
-			tempMatchNumber = GUI.TextArea (new Rect (410, 40, 100, 50), tempMatchNumber);
-			tempScoutName = GUI.TextArea (new Rect (150, 125, 100, 50), tempScoutName);
+			tempTeamNumber = GUI.TextArea (ScaledTextArea(100, 40, 100, 50, SharedValues.dpiScale), tempTeamNumber);
+			tempMatchNumber = GUI.TextArea (ScaledTextArea(410, 40, 100, 50, SharedValues.dpiScale), tempMatchNumber);
+			tempScoutName = GUI.TextArea (ScaledTextArea(150, 125, 100, 50, SharedValues.dpiScale), tempScoutName);
 		} else if (screen == 4) {
-			tempComment = GUI.TextArea (new Rect (50, 80, Screen.width - 100, 200), tempComment);
+			tempComment = GUI.TextArea (ScaledTextArea(50, 80, Screen.width - 100, 200, SharedValues.dpiScale), tempComment);
 		} else if (screen == 10) {
-			defenseTeamNumber1 = GUI.TextArea (new Rect (100, 180-25, 100, 50), defenseTeamNumber1);
-			defenseTeamNumber2 = GUI.TextArea (new Rect (350, 180-25, 100, 50), defenseTeamNumber2);
-			defenseTeamNumber3 = GUI.TextArea (new Rect (600, 180-25, 100, 50), defenseTeamNumber3);
+			defenseTeamNumber1 = GUI.TextArea (ScaledTextArea(100, 180-25, 100, 50, SharedValues.dpiScale), defenseTeamNumber1);
+			defenseTeamNumber2 = GUI.TextArea (ScaledTextArea(350, 180-25, 100, 50, SharedValues.dpiScale), defenseTeamNumber2);
+			defenseTeamNumber3 = GUI.TextArea (ScaledTextArea(600, 180-25, 100, 50, SharedValues.dpiScale), defenseTeamNumber3);
 
-			audienceCategory = GUI.TextArea (new Rect (220, 260-25, 100, 50), audienceCategory);
+			audienceCategory = GUI.TextArea (ScaledTextArea(220, 260-25, 100, 50, SharedValues.dpiScale), audienceCategory);
 
-			tempMatchNumberField = GUI.TextArea (new Rect (110, 50-25, 100, 50), tempMatchNumberField);
+			tempMatchNumberField = GUI.TextArea (ScaledTextArea(110, 50-25, 100, 50, SharedValues.dpiScale), tempMatchNumberField);
 		}
 	}
 
