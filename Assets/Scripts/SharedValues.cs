@@ -288,6 +288,7 @@ public class SharedValues : MonoBehaviour {
 
 	void OnGUI(){
 		if(myStyle == null){
+			//TODO get this to work
 			myStyle = new GUIStyle("textarea");
 			fontSize = myStyle.fontSize;
 			print("fontSize: " + fontSize);
