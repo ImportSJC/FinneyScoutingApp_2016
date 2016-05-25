@@ -10,7 +10,7 @@ public class LabelFunction : MonoBehaviour {
     private int offsetTop = 0;
     private int offsetBottom = 0;
 
-    private int fontSize = 0;
+    private int fontSize = 25;
 
 	// Use this for initialization
 	void Start () {

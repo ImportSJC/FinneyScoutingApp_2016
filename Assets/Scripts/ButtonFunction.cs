@@ -15,7 +15,7 @@ public class ButtonFunction : MonoBehaviour {
 	private int offsetTop = 0;
 	private int offsetBottom = 0;
 
-    private int fontSize = 0;
+    private int fontSize = 25;
 
 	// Use this for initialization
 	void Start () {
@@ -40,12 +40,8 @@ public class ButtonFunction : MonoBehaviour {
 			offsetLeft = myButton.offset.left;
 			offsetTop = myButton.offset.top;
 			offsetBottom = myButton.offset.bottom;
-            fontSize = myToggle.style.fontSize;
+            fontSize = myButton.style.fontSize;
         }
-        //print("Name: " + this.name + " offsetRight: " + offsetRight);
-        //print("Name: " + this.name + " offsetLeft: " + offsetLeft);
-        //print("Name: " + this.name + " offsetTop: " + offsetTop);
-        //print("Name: " + this.name + " offsetBottom: " + offsetBottom);
     }
 
 	void onButtonClick(){
@@ -216,19 +212,19 @@ public class ButtonFunction : MonoBehaviour {
             myButton.offset.left = (int)(offsetLeft * SharedValues.dpiScale);
             myButton.offset.top = (int)(offsetTop * SharedValues.dpiScale);
             myButton.offset.bottom = (int)(offsetBottom * SharedValues.dpiScale);
-            //myButton.style.fontSize = (int)(fontSize * SharedValues.dpiScale);
+            myButton.style.fontSize = (int)(fontSize * SharedValues.dpiScale);
         } else if (myToggle != null) {
             myToggle.offset.right = (int)(offsetRight * SharedValues.dpiScale);
             myToggle.offset.left = (int)(offsetLeft * SharedValues.dpiScale);
 			myToggle.offset.top = (int)(offsetTop * SharedValues.dpiScale);
 			myToggle.offset.bottom = (int)(offsetBottom * SharedValues.dpiScale);
-            //myToggle.style.fontSize = (int)(fontSize * SharedValues.dpiScale);
+            myToggle.style.fontSize = (int)(fontSize * SharedValues.dpiScale);
         } else if (myList != null) {
 			myList.offset.right = (int)(offsetRight * SharedValues.dpiScale);
 			myList.offset.left = (int)(offsetLeft * SharedValues.dpiScale);
 			myList.offset.top = (int)(offsetTop * SharedValues.dpiScale);
 			myList.offset.bottom = (int)(offsetBottom * SharedValues.dpiScale);
-            //myList.style.fontSize = (int)(fontSize * SharedValues.dpiScale);
+            myList.style.fontSize = (int)(fontSize * SharedValues.dpiScale);
         }
 		switch (this.name) {
 		case("NextPage_Button"):

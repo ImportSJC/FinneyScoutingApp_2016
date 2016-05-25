@@ -57,6 +57,9 @@ public class SharedValues : MonoBehaviour {
     private int offsetTop = 0;
     private int offsetBottom = 0;
 
+    private GUIStyle myStyle;
+    private int fontSize = 25;
+
     // Use this for initialization
     void Start () {
 		fileDirectory = Application.persistentDataPath + "/";
@@ -284,21 +287,28 @@ public class SharedValues : MonoBehaviour {
     }
 
 	void OnGUI(){
+		if(myStyle == null){
+			myStyle = new GUIStyle("textarea");
+			fontSize = myStyle.fontSize;
+			print("fontSize: " + fontSize);
+		}
+
+		myStyle.fontSize = (int)(fontSize * SharedValues.dpiScale);
 
 		if (screen == 0) {
-			tempTeamNumber = GUI.TextArea (ScaledTextArea(100, 40, 100, 50, SharedValues.dpiScale), tempTeamNumber);
-			tempMatchNumber = GUI.TextArea (ScaledTextArea(410, 40, 100, 50, SharedValues.dpiScale), tempMatchNumber);
-			tempScoutName = GUI.TextArea (ScaledTextArea(150, 125, 100, 50, SharedValues.dpiScale), tempScoutName);
+			tempTeamNumber = GUI.TextArea (ScaledTextArea(100, 40, 100, 50, SharedValues.dpiScale), tempTeamNumber, myStyle);
+			tempMatchNumber = GUI.TextArea (ScaledTextArea(410, 40, 100, 50, SharedValues.dpiScale), tempMatchNumber, myStyle);
+			tempScoutName = GUI.TextArea (ScaledTextArea(150, 125, 100, 50, SharedValues.dpiScale), tempScoutName, myStyle);
 		} else if (screen == 4) {
-			tempComment = GUI.TextArea (ScaledTextArea(50, 80, Screen.width - 100, 200, SharedValues.dpiScale), tempComment);
+			tempComment = GUI.TextArea (ScaledTextArea(50, 80, Screen.width - 100, 200, SharedValues.dpiScale), tempComment, myStyle);
 		} else if (screen == 10) {
-			defenseTeamNumber1 = GUI.TextArea (ScaledTextArea(100, 180-25, 100, 50, SharedValues.dpiScale), defenseTeamNumber1);
-			defenseTeamNumber2 = GUI.TextArea (ScaledTextArea(350, 180-25, 100, 50, SharedValues.dpiScale), defenseTeamNumber2);
-			defenseTeamNumber3 = GUI.TextArea (ScaledTextArea(600, 180-25, 100, 50, SharedValues.dpiScale), defenseTeamNumber3);
+			defenseTeamNumber1 = GUI.TextArea (ScaledTextArea(100, 180-25, 100, 50, SharedValues.dpiScale), defenseTeamNumber1, myStyle);
+			defenseTeamNumber2 = GUI.TextArea (ScaledTextArea(350, 180-25, 100, 50, SharedValues.dpiScale), defenseTeamNumber2, myStyle);
+			defenseTeamNumber3 = GUI.TextArea (ScaledTextArea(600, 180-25, 100, 50, SharedValues.dpiScale), defenseTeamNumber3, myStyle);
 
-			audienceCategory = GUI.TextArea (ScaledTextArea(220, 260-25, 100, 50, SharedValues.dpiScale), audienceCategory);
+			audienceCategory = GUI.TextArea (ScaledTextArea(220, 260-25, 100, 50, SharedValues.dpiScale), audienceCategory, myStyle);
 
-			tempMatchNumberField = GUI.TextArea (ScaledTextArea(110, 50-25, 100, 50, SharedValues.dpiScale), tempMatchNumberField);
+			tempMatchNumberField = GUI.TextArea (ScaledTextArea(110, 50-25, 100, 50, SharedValues.dpiScale), tempMatchNumberField, myStyle);
 		}
 	}
 
