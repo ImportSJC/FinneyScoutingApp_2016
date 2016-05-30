@@ -143,6 +143,9 @@ namespace LostPolygon.AndroidBluetoothMultiplayer.Examples {
             {
                 Network.Disconnect();
                 shared.SendMessage("disconnected");
+            }else
+            {
+                shared.SendMessage("disconnected");
             }
         }
 
@@ -151,6 +154,9 @@ namespace LostPolygon.AndroidBluetoothMultiplayer.Examples {
             if (Network.peerType != NetworkPeerType.Disconnected)
             {
                 Network.Disconnect();
+                shared.SendMessage("disconnected");
+            }else
+            {
                 shared.SendMessage("disconnected");
             }
         }
@@ -205,6 +211,7 @@ namespace LostPolygon.AndroidBluetoothMultiplayer.Examples {
 
         private void OnBluetoothConnectionToServerFailed(BluetoothDevice device) {
             Debug.Log("Event - ConnectionToServerFailed: " + BluetoothExamplesTools.FormatDevice(device));
+            shared.SendMessage("disconnected");
         }
 
         private void OnBluetoothConnectedToServer(BluetoothDevice device) {
@@ -221,6 +228,7 @@ namespace LostPolygon.AndroidBluetoothMultiplayer.Examples {
 
         private void OnBluetoothAdapterEnableFailed() {
             Debug.Log("Event - AdapterEnableFailed");
+            shared.SendMessage("disconnected");
         }
 
         private void OnBluetoothAdapterEnabled() {
@@ -243,6 +251,7 @@ namespace LostPolygon.AndroidBluetoothMultiplayer.Examples {
 
         private void OnBluetoothDiscoverabilityEnableFailed() {
             Debug.Log("Event - DiscoverabilityEnableFailed");
+            shared.SendMessage("disconnected");
         }
 
         private void OnBluetoothDiscoverabilityEnabled(int discoverabilityDuration) {
@@ -261,6 +270,7 @@ namespace LostPolygon.AndroidBluetoothMultiplayer.Examples {
 
         private void OnFailedToConnect(NetworkConnectionError error) {
             Debug.Log("Can't connect to the networking server");
+            shared.SendMessage("disconnected");
 
             // Stopping all Bluetooth connectivity on Unity networking disconnect event
             AndroidBluetoothMultiplayer.Stop();
@@ -271,6 +281,7 @@ namespace LostPolygon.AndroidBluetoothMultiplayer.Examples {
 
             // Stopping all Bluetooth connectivity on Unity networking disconnect event
             AndroidBluetoothMultiplayer.Stop();
+            shared.SendMessage("disconnected");
 
             GameObject myObject = GameObject.FindGameObjectWithTag("ClientInfo");
             Destroy(myObject);
