@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+
 public class WindowFunction : MonoBehaviour {
 
 	private Match.defenses tempDefense;

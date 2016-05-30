@@ -3,6 +3,8 @@ using System.Collections;
 using System.IO;
 using System;
 
+
+
 public class Team {
 	private static int[] validTeamList = {20,73,174,191,250,271,340,378,395,578,639,810,1126,1405,1450,1507,
 											1511,1518,1551,1559,1585,1591,1665,1765,1880,2010,2228,2340,2383,

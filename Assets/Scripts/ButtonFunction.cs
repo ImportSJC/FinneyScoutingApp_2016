@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using LostPolygon.AndroidBluetoothMultiplayer.Examples;
 
 public class ButtonFunction : MonoBehaviour {
 
@@ -17,8 +18,13 @@ public class ButtonFunction : MonoBehaviour {
 
     private int fontSize = 25;
 
+    private GameObject bluetooth;
+
 	// Use this for initialization
 	void Start () {
+
+        bluetooth = GameObject.FindGameObjectWithTag("MainCamera");
+
         if (this.name.Contains ("Toggle")) {
 			myToggle = this.GetComponent<InstantGuiToggle> ();
 			offsetRight = myToggle.offset.right;
@@ -183,7 +189,11 @@ public class ButtonFunction : MonoBehaviour {
 			SharedValues.decreaseDPI ();
 			break;
 
-		case("FieldMode_Button"):
+        case ("Bluetooth_Button"):
+            SharedValues.screen = (int)SharedValues.screens.bluetooth;
+            break;
+
+            case ("FieldMode_Button"):
 			SharedValues.screen = 10;
 			Team.loadAllMatches ();
 			break;
@@ -203,7 +213,23 @@ public class ButtonFunction : MonoBehaviour {
 		case("FieldLoadMatch_Button"):
 			SharedValues.loadFieldMatch (int.Parse (SharedValues.tempMatchNumberField));
 			break;
-		}
+            //BLUETOOTH
+        case ("CreateServer_Button"):
+                BluetoothDemo.createServer();
+                break;
+        case ("ConnectToServer_Button"):
+                BluetoothDemo.connectToServer();
+            break;
+        case ("StopServer_Button"):
+            BluetoothDemo.stopServer();
+            break;
+        case ("Disconnect_Button"):
+            BluetoothDemo.disconnectFromServer();
+            break;
+        case ("BluetoothBack_Button"):
+            SharedValues.screen = (int)SharedValues.screens.page0;
+            break;
+        }
 	}
 
 	void updateButtons(){

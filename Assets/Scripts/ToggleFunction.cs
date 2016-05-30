@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class ToggleFunction : MonoBehaviour {
 
 	InstantGuiToggle myToggle;

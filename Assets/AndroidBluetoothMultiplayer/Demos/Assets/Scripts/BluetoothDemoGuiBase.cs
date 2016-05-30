@@ -6,6 +6,7 @@ namespace LostPolygon.AndroidBluetoothMultiplayer.Examples {
     /// Base GUI used for demos.
     /// </summary>
     public abstract class BluetoothDemoGuiBase : MonoBehaviour {
+        private bool createdServer;
         protected virtual void OnLevelWasLoaded(int level) {
             Screen.sleepTimeout = 500;
             CameraFade.StartAlphaFade(Color.black, true, 0.25f, 0.0f);
@@ -16,6 +17,12 @@ namespace LostPolygon.AndroidBluetoothMultiplayer.Examples {
         }
 
         protected virtual void Update() {
+            if (createdServer)
+            {
+                GameObject.FindGameObjectWithTag("MainCamera").SendMessage("createdServer");
+                createdServer = false;
+            }
+
             if (Input.GetKeyDown(KeyCode.Escape)) {
                 GoBackToMenu();
             }
@@ -26,6 +33,11 @@ namespace LostPolygon.AndroidBluetoothMultiplayer.Examples {
             if (GUI.Button(new Rect(Screen.width / scaleFactor - (100f + 15f), Screen.height / scaleFactor - (40f + 15f), 100f, 40f), "Back")) {
                 GoBackToMenu();
             }
+        }
+
+        protected void myCreatedServer()
+        {
+            createdServer = true;
         }
 
         protected void GoBackToMenu() {
